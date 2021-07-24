@@ -70,6 +70,18 @@ t_philo *init_philosophers(int count, t_fork *forks)
 	return res;
 }
 
+void start_philosophers(t_philo *philosophers, int count)
+{
+	int i;
+
+	i = 0;
+	while (i < count)
+	{
+		pthread_detach(philosophers[i].thread);
+		i++;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	int num_of_philo = 3;
@@ -79,4 +91,7 @@ int main(int argc, char **argv)
 
 	forks = init_forks(num_of_philo);
 	philosophers = init_philosophers(num_of_philo, forks);
+	start_philosophers(philosophers, num_of_philo);
+	while (1)
+		;
 }

@@ -12,6 +12,11 @@ void set_last_meal_time(t_philo *philo)
 void *philo_routine(void *p)
 {
 	t_philo *philo = (t_philo *)p;
-	printf("hello, philo%d", philo->num);
+
+	while (1)
+	{
+		set_last_meal_time(philo);
+		printf("%ld hello, philo %d\n", philo->last_meal_time.tv_sec, philo->num);
+	}
 	return (NULL);
 }
