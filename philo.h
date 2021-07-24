@@ -9,6 +9,12 @@ typedef struct s_fork t_fork;
 
 typedef struct timeval t_time;
 
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+} t_bool;
+
 struct s_fork
 {
 	int weight;
