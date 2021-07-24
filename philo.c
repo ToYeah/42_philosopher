@@ -14,8 +14,8 @@ struct s_fork
 
 struct s_philo
 {
-	t_fork *left;
-	t_fork *right;
+	t_fork *bigger;
+	t_fork *smaller;
 	pthread_t thread;
 	int num;
 };
@@ -54,13 +54,21 @@ t_fork *init_forks(int count)
 
 void init_philosophers_fork(t_philo *philo, t_fork *forks, int count)
 {
-	int right_index;
+	int fork_index;
 
-	right_index = philo->num - 1;
-	if (right_index < 0)
-		right_index = count;
-	philo->left = &(forks[philo->num]);
-	philo->right = &(forks[right_index]);
+	fork_index = philo->num - 1;
+	if (fork_index < 0)
+		fork_index = count;
+	if (fork_index < philo->num)
+	{
+		philo->bigger = &(forks[philo->num]);
+		philo->smaller = &(forks[fork_index]);
+	}
+	else
+	{
+		philo->bigger = &(forks[fork_index]);
+		philo->smaller = &(forks[philo->num]);
+	}
 }
 
 t_philo *init_philosophers(int count, t_fork *forks)
