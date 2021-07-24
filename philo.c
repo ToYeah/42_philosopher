@@ -1,12 +1,5 @@
 #include "philo.h"
 
-void *philo_routine(void *p)
-{
-	t_philo *philo = (t_philo *)p;
-	printf("hello, philo%d", philo->num);
-	return (NULL);
-}
-
 t_fork *init_forks(int count)
 {
 	t_fork *res;

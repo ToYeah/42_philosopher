@@ -23,3 +23,5 @@ struct s_philo
 	t_time last_meal_time;
 	int num;
 };
+
+void *philo_routine(void *p);
