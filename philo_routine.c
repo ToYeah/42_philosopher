@@ -1,10 +1,17 @@
 #include "philo.h"
 
-void put_philo_log(int num, const char *str)
+void record_philo_action(t_philo *philo, const char *str, t_bool is_eat)
 {
 	t_time time;
-	gettimeofday(&time, NULL);
-	printf("%ld%d %d %s\n", time.tv_sec, time.tv_usec, num, str);
+
+	if (gettimeofday(&time, NULL) != 0)
+	{
+		//error
+		exit(1);
+	}
+	if (is_eat)
+		philo->last_meal_time = time;
+	printf("%ld%d %d %s\n", time.tv_sec, time.tv_usec, philo->num, str);
 }
 
 void set_last_meal_time(t_philo *philo)
@@ -23,7 +30,7 @@ void take_fork(t_philo *philo, t_bool is_bigger)
 		pthread_mutex_lock(&(philo->bigger->mutex));
 	else
 		pthread_mutex_lock(&(philo->smaller->mutex));
-	put_philo_log(philo->num, MSG_FORK);
+	record_philo_action(philo, MSG_FORK, FALSE);
 }
 
 void put_fork(t_philo *philo, t_bool is_bigger)
