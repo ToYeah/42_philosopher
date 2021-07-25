@@ -5,6 +5,12 @@
 #include <unistd.h>
 #include <limits.h>
 
+#define MSG_FORK "has taken a fork"
+#define MSG_EAT "is eating"
+#define MSG_SLEEP "is sleeping"
+#define MSG_THINK "is thinking"
+#define MSG_DIE "died"
+
 typedef struct s_philo t_philo;
 
 typedef struct s_fork t_fork;
