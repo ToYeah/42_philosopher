@@ -77,9 +77,11 @@ int main(int argc, char **argv)
 
 	t_philo *philosophers;
 	t_fork *forks;
+	t_rule rule;
 
-	forks = init_forks(num_of_philo);
-	philosophers = init_philosophers(num_of_philo, forks);
+	input_arg(&rule, argc, argv);
+	forks = init_forks(rule.num);
+	philosophers = init_philosophers(rule.num, forks);
 	while (1)
 		;
 }
