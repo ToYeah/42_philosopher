@@ -44,7 +44,7 @@ void init_philosophers_fork(t_philo *philo, t_fork *forks, int count)
 	}
 }
 
-t_philo *init_philosophers(int count, t_fork *forks)
+t_philo *init_philosophers(int count, t_fork *forks, t_rule *rule)
 {
 	t_philo *res;
 	int i;
@@ -59,6 +59,7 @@ t_philo *init_philosophers(int count, t_fork *forks)
 	while (i < count)
 	{
 		res[i].num = i + 1;
+		res[i].rule = rule;
 		init_philosophers_fork(&(res[i]), forks, count);
 		if (pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i])) != 0)
 		{
@@ -81,7 +82,7 @@ int main(int argc, char **argv)
 
 	input_arg(&rule, argc, argv);
 	forks = init_forks(rule.num);
-	philosophers = init_philosophers(rule.num, forks);
+	philosophers = init_philosophers(rule.num, forks, &(rule));
 	while (1)
 		;
 }

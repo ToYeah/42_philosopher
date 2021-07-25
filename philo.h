@@ -46,6 +46,7 @@ struct s_philo
 	pthread_t thread;
 	t_time last_meal_time;
 	int num;
+	t_rule *rule;
 };
 
 void *philo_routine(void *p);
