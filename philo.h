@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <limits.h>
 
 typedef struct s_philo t_philo;
 
@@ -42,3 +43,6 @@ struct s_philo
 };
 
 void *philo_routine(void *p);
+
+t_bool ft_atoi_limit(const char *str, int *return_value);
+t_bool is_num_str(char *str);
