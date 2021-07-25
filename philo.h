@@ -16,6 +16,16 @@ typedef enum e_bool
 	TRUE
 } t_bool;
 
+typedef struct s_rule
+{
+	int num;
+	int time_to_die;
+	int time_to_eat;
+	int time_to_sleep;
+	t_bool option_exists;
+	int option;
+} t_rule;
+
 struct s_fork
 {
 	int weight;
