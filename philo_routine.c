@@ -41,6 +41,31 @@ void put_fork(t_philo *philo, t_bool is_bigger)
 		pthread_mutex_unlock(&(philo->smaller->mutex));
 }
 
+void eat_meal(t_philo *philo)
+{
+	record_philo_action(philo, MSG_EAT, TRUE);
+	if (usleep(philo->rule->time_to_eat) != 0)
+	{
+		//errpr
+		exit(1);
+	}
+}
+
+void sleep_philo(t_philo *philo)
+{
+	record_philo_action(philo, MSG_SLEEP, FALSE);
+	if (usleep(philo->rule->time_to_sleep) != 0)
+	{
+		//errpr
+		exit(1);
+	}
+}
+
+void think_philo(t_philo *philo)
+{
+	record_philo_action(philo, MSG_THINK, FALSE);
+}
+
 void *philo_routine(void *p)
 {
 	t_philo *philo = (t_philo *)p;
@@ -50,11 +75,11 @@ void *philo_routine(void *p)
 		set_last_meal_time(philo);
 		take_fork(philo, TRUE);
 		take_fork(philo, FALSE);
-		printf("%d hello, philo %d\n", philo->last_meal_time.tv_usec, philo->num);
-		usleep(500000);
+		eat_meal(philo);
 		put_fork(philo, FALSE);
 		put_fork(philo, TRUE);
-		usleep(500000);
+		sleep_philo(philo);
+		think_philo(philo);
 	}
 	return (NULL);
 }
