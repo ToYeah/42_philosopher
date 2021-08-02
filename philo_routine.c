@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void record_philo_action(t_philo *philo, const char *str, t_bool is_eat)
+t_time record_philo_action(t_philo *philo, const char *str, t_bool is_eat)
 {
 	t_time time;
 
@@ -12,6 +12,7 @@ void record_philo_action(t_philo *philo, const char *str, t_bool is_eat)
 	if (is_eat)
 		philo->last_meal_time = time;
 	printf("%ld%d %d %s\n", time.tv_sec, time.tv_usec, philo->num, str);
+	return time;
 }
 
 void set_last_meal_time(t_philo *philo)
