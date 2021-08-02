@@ -1,6 +1,6 @@
 #include "philo.h"
 
-t_time record_philo_action(t_philo *philo, const char *str, t_bool is_eat)
+t_time record_philo_action(t_philo *philo, const char *str)
 {
 	t_time time;
 
@@ -9,8 +9,6 @@ t_time record_philo_action(t_philo *philo, const char *str, t_bool is_eat)
 		//error
 		exit(1);
 	}
-	if (is_eat)
-		philo->last_meal_time = time;
 	printf("%ld%d %d %s\n", time.tv_sec, time.tv_usec, philo->num, str);
 	return time;
 }
@@ -31,7 +29,7 @@ void take_fork(t_philo *philo, t_bool is_bigger)
 		pthread_mutex_lock(&(philo->bigger->mutex));
 	else
 		pthread_mutex_lock(&(philo->smaller->mutex));
-	record_philo_action(philo, MSG_FORK, FALSE);
+	record_philo_action(philo, MSG_FORK);
 }
 
 void put_fork(t_philo *philo, t_bool is_bigger)
@@ -44,7 +42,7 @@ void put_fork(t_philo *philo, t_bool is_bigger)
 
 void eat_meal(t_philo *philo)
 {
-	record_philo_action(philo, MSG_EAT, TRUE);
+	philo->last_meal_time = record_philo_action(philo, MSG_EAT);
 	if (usleep(philo->rule->time_to_eat) != 0)
 	{
 		//errpr
@@ -54,7 +52,7 @@ void eat_meal(t_philo *philo)
 
 void sleep_philo(t_philo *philo)
 {
-	record_philo_action(philo, MSG_SLEEP, FALSE);
+	record_philo_action(philo, MSG_SLEEP);
 	if (usleep(philo->rule->time_to_sleep) != 0)
 	{
 		//errpr
@@ -64,7 +62,7 @@ void sleep_philo(t_philo *philo)
 
 void think_philo(t_philo *philo)
 {
-	record_philo_action(philo, MSG_THINK, FALSE);
+	record_philo_action(philo, MSG_THINK);
 }
 
 void *philo_routine(void *p)
