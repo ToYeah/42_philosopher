@@ -12,26 +12,18 @@ long get_time_in_ms()
 	return ((long)(now.tv_sec * 1000 + now.tv_usec / 1000));
 }
 
-t_time record_philo_action(t_philo *philo, const char *str)
+long record_philo_action(t_philo *philo, const char *str)
 {
-	t_time time;
+	long time;
 
-	if (gettimeofday(&time, NULL) != 0)
-	{
-		//error
-		exit(1);
-	}
-	printf("%ld%d %d %s\n", time.tv_sec, time.tv_usec, philo->num, str);
+	time = get_time_in_ms();
+	printf("%ld %ld %s\n", time, philo->num, str);
 	return time;
 }
 
 void set_last_meal_time(t_philo *philo)
 {
-	if (gettimeofday(&(philo->last_meal_time), NULL) != 0)
-	{
-		//error
-		exit(1);
-	}
+	philo->last_meal_time = get_time_in_ms();
 }
 
 void take_fork(t_philo *philo, t_bool is_bigger)

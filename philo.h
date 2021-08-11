@@ -45,7 +45,7 @@ struct s_philo
 	t_fork *bigger;
 	t_fork *smaller;
 	pthread_t thread;
-	t_time last_meal_time;
+	long last_meal_time;
 	long num;
 	t_rule *rule;
 };
