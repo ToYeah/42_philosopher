@@ -53,5 +53,5 @@ void *philo_routine(void *p);
 
 void input_arg(t_rule *rule, int argc, char **argv);
 
-t_bool ft_atoi_limit(const char *str, int *return_value);
+t_bool ft_atol_limit(const char *str, long *return_value);
 t_bool is_num_str(char *str);

@@ -1,6 +1,6 @@
 #include "philo.h"
 
-t_bool ft_atoi_limit(const char *str, int *return_value)
+t_bool ft_atol_limit(const char *str, long *return_value)
 {
 	int i;
 	int sign;
@@ -9,7 +9,7 @@ t_bool ft_atoi_limit(const char *str, int *return_value)
 
 	i = 0;
 	res = 0;
-	div = INT_MAX / 10;
+	div = LONG_MAX / 10;
 	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
 		i++;
 	sign = str[i] == '-' ? -1 : 1;
@@ -24,7 +24,7 @@ t_bool ft_atoi_limit(const char *str, int *return_value)
 		res *= 10;
 		res += str[i++] - '0';
 	}
-	*return_value = (int)res * sign;
+	*return_value = (long)res * sign;
 	return (TRUE);
 }
 
