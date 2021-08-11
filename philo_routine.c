@@ -12,6 +12,25 @@ long get_time_in_ms()
 	return ((long)(now.tv_sec * 1000 + now.tv_usec / 1000));
 }
 
+void philo_usleep(long time)
+{
+	long start;
+	long now;
+
+	start = get_time_in_ms();
+	while(1)
+	{
+		now = get_time_in_ms();
+		if (now - start >= time)
+			break;
+		if (usleep(1000) != 0)
+		{
+				//errpr
+			exit(1);
+		}
+	}
+}
+
 long record_philo_action(t_philo *philo, const char *str)
 {
 	long time;
@@ -44,21 +63,13 @@ void put_fork(t_philo *philo, t_bool is_bigger)
 void eat_meal(t_philo *philo)
 {
 	philo->last_meal_time = record_philo_action(philo, MSG_EAT);
-	if (usleep(philo->rule->time_to_eat) != 0)
-	{
-		//errpr
-		exit(1);
-	}
+	philo_usleep(philo->rule->time_to_eat);
 }
 
 void sleep_philo(t_philo *philo)
 {
 	record_philo_action(philo, MSG_SLEEP);
-	if (usleep(philo->rule->time_to_sleep) != 0)
-	{
-		//errpr
-		exit(1);
-	}
+	philo_usleep(philo->rule->time_to_sleep);
 }
 
 void think_philo(t_philo *philo)
