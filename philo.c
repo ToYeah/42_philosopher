@@ -81,6 +81,11 @@ int main(int argc, char **argv)
 	t_rule rule;
 
 	input_arg(&rule, argc, argv);
+	if (pthread_mutex_init(&(rule.right_to_output), NULL) != 0)
+	{
+		//error
+		exit(1);
+	}
 	forks = init_forks(rule.num);
 	philosophers = init_philosophers(rule.num, forks, &(rule));
 	while (1)

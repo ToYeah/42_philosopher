@@ -31,6 +31,7 @@ typedef struct s_rule
 	long time_to_sleep;
 	t_bool option_exists;
 	long option;
+	pthread_mutex_t right_to_output;
 } t_rule;
 
 struct s_fork
