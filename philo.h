@@ -25,17 +25,17 @@ typedef enum e_bool
 
 typedef struct s_rule
 {
-	int num;
-	int time_to_die;
-	int time_to_eat;
-	int time_to_sleep;
+	long num;
+	long time_to_die;
+	long time_to_eat;
+	long time_to_sleep;
 	t_bool option_exists;
-	int option;
+	long option;
 } t_rule;
 
 struct s_fork
 {
-	int weight;
+	long weight;
 	pthread_mutex_t mutex;
 };
 
@@ -45,7 +45,7 @@ struct s_philo
 	t_fork *smaller;
 	pthread_t thread;
 	t_time last_meal_time;
-	int num;
+	long num;
 	t_rule *rule;
 };
 

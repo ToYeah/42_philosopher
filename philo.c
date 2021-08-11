@@ -1,9 +1,9 @@
 #include "philo.h"
 
-t_fork *init_forks(int count)
+t_fork *init_forks(long count)
 {
 	t_fork *res;
-	int i;
+	long i;
 
 	res = malloc(sizeof(t_fork) * count);
 	if (!res)
@@ -25,9 +25,9 @@ t_fork *init_forks(int count)
 	return res;
 }
 
-void init_philosophers_fork(t_philo *philo, t_fork *forks, int count)
+void init_philosophers_fork(t_philo *philo, t_fork *forks, long count)
 {
-	int fork_index;
+	long fork_index;
 
 	fork_index = philo->num - 1;
 	if (fork_index < 0)
@@ -44,10 +44,10 @@ void init_philosophers_fork(t_philo *philo, t_fork *forks, int count)
 	}
 }
 
-t_philo *init_philosophers(int count, t_fork *forks, t_rule *rule)
+t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 {
 	t_philo *res;
-	int i;
+	long i;
 
 	res = malloc(sizeof(t_philo) * count);
 	if (!res)

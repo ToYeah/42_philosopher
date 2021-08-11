@@ -1,16 +1,16 @@
 #include "philo.h"
 
-t_bool input_num_arg(int *dest, char *str)
+t_bool input_num_arg(long *dest, char *str)
 {
     if (is_num_str(str) &&
-        ft_atoi_limit(str, dest))
+        ft_atol_limit(str, dest))
     {
         return (TRUE);
     }
     return (FALSE);
 }
 
-t_bool input_option_arg(t_rule *rule, int argc, char **argv)
+t_bool input_option_arg(t_rule *rule, long argc, char **argv)
 {
     if (argc != 6)
     {
