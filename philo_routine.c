@@ -1,27 +1,15 @@
 #include "philo.h"
 
-t_time calc_time_sub(t_time start, unsigned int time)
+long get_time_in_ms()
 {
 	t_time now;
-	t_time result;
 
-	if (gettimeofday(&now, NULL) != 0)
+	if (gettimeofday(&now, NULL))
 	{
 		//error
 		exit(1);
 	}
-	now.tv_sec -= start.tv_sec;
-	now.tv_usec -= start.tv_usec;
-	if (now.tv_usec < 0)
-	{
-		--now.tv_sec;
-		now.tv_usec += 1000000;
-	}
-	return now;
-}
-
-void philo_usleep(t_time start_time, unsigned int time)
-{
+	return ((long)(now.tv_sec * 1000 + now.tv_usec / 1000));
 }
 
 t_time record_philo_action(t_philo *philo, const char *str)
