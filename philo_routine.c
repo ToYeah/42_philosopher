@@ -21,11 +21,6 @@ long record_philo_action(t_philo *philo, const char *str)
 	return time;
 }
 
-void set_last_meal_time(t_philo *philo)
-{
-	philo->last_meal_time = get_time_in_ms();
-}
-
 void take_fork(t_philo *philo, t_bool is_bigger)
 {
 
@@ -73,9 +68,9 @@ void *philo_routine(void *p)
 {
 	t_philo *philo = (t_philo *)p;
 
+	philo->last_meal_time = get_time_in_ms();
 	while (1)
 	{
-		set_last_meal_time(philo);
 		take_fork(philo, TRUE);
 		take_fork(philo, FALSE);
 		eat_meal(philo);
