@@ -72,18 +72,23 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 	return res;
 }
 
+void init_rule(t_rule *rule, int argc, char **argv)
+{
+	input_arg(rule, argc, argv);
+	if (pthread_mutex_init(&(rule->right_to_output), NULL) != 0)
+	{
+		//error
+		exit(1);
+	}
+}
+
 int main(int argc, char **argv)
 {
 	t_philo *philosophers;
 	t_fork *forks;
 	t_rule rule;
 
-	input_arg(&rule, argc, argv);
-	if (pthread_mutex_init(&(rule.right_to_output), NULL) != 0)
-	{
-		//error
-		exit(1);
-	}
+	init_rule(&rule, argc, argv);
 	forks = init_forks(rule.num);
 	philosophers = init_philosophers(rule.num, forks, &(rule));
 	while (1)
