@@ -74,8 +74,6 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 
 int main(int argc, char **argv)
 {
-	int num_of_philo = 3;
-
 	t_philo *philosophers;
 	t_fork *forks;
 	t_rule rule;
