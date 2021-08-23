@@ -66,7 +66,6 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 			//error
 			exit(1);
 		}
-		pthread_detach(res[i].thread);
 		i++;
 	}
 	return res;
@@ -82,6 +81,18 @@ void init_rule(t_rule *rule, int argc, char **argv)
 	}
 }
 
+void join_philosophers(t_philo *philos, long count)
+{
+	long i;
+
+	i = 0;
+	while (i < count)
+	{
+		pthread_join(philos[i].thread, NULL);
+		i++;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	t_philo *philosophers;
@@ -91,6 +102,5 @@ int main(int argc, char **argv)
 	init_rule(&rule, argc, argv);
 	forks = init_forks(rule.num);
 	philosophers = init_philosophers(rule.num, forks, &(rule));
-	while (1)
-		;
+	join_philosophers(philosophers, rule.num);
 }
