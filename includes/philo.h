@@ -32,6 +32,8 @@ typedef struct s_rule
 	t_bool option_exists;
 	long option;
 	pthread_mutex_t right_to_output;
+	pthread_mutex_t right_to_consultation;
+	t_bool  dead_exists;
 } t_rule;
 
 struct s_fork
@@ -45,6 +47,7 @@ struct s_philo
 	t_fork *bigger;
 	t_fork *smaller;
 	pthread_t thread;
+	pthread_t doctor;
 	long last_meal_time;
 	long num;
 	t_rule *rule;
@@ -60,3 +63,5 @@ t_bool is_num_str(char *str);
 long get_time_in_us();
 long get_time_in_ms();
 void philo_usleep(long time);
+long record_philo_action(t_philo *philo, const char *str);
+void *doctor_routine(void *p);

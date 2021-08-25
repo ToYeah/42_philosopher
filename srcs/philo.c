@@ -48,8 +48,10 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 {
 	t_philo *res;
 	long i;
+	int create_res;
 
 	res = malloc(sizeof(t_philo) * count);
+	create_res = 0;
 	if (!res)
 	{
 		//error
@@ -60,8 +62,11 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 	{
 		res[i].num = i + 1;
 		res[i].rule = rule;
+		res[i].last_meal_time = get_time_in_ms();
 		init_philosophers_fork(&(res[i]), forks, count);
-		if (pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i])) != 0)
+		create_res += pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i]));
+		create_res += pthread_create(&(res[i].doctor), NULL, doctor_routine, &(res[i]));
+		if (create_res != 0)
 		{
 			//error
 			exit(1);
@@ -73,12 +78,18 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 
 void init_rule(t_rule *rule, int argc, char **argv)
 {
+	int create_res;
+
+	create_res = 0;
 	input_arg(rule, argc, argv);
-	if (pthread_mutex_init(&(rule->right_to_output), NULL) != 0)
+	create_res += pthread_mutex_init(&(rule->right_to_output), NULL);
+	create_res += pthread_mutex_init(&(rule->right_to_consultation), NULL);
+	if (create_res != 0)
 	{
 		//error
 		exit(1);
 	}
+	rule->dead_exists = FALSE;
 }
 
 void join_philosophers(t_philo *philos, long count)
@@ -89,6 +100,7 @@ void join_philosophers(t_philo *philos, long count)
 	while (i < count)
 	{
 		pthread_join(philos[i].thread, NULL);
+		pthread_join(philos[i].doctor, NULL);
 		i++;
 	}
 }

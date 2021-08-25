@@ -1,16 +1,5 @@
 #include "philo.h"
 
-long record_philo_action(t_philo *philo, const char *str)
-{
-	long time;
-
-	pthread_mutex_lock(&(philo->rule->right_to_output));
-	time = get_time_in_ms();
-	printf("%ld %ld %s\n", time, philo->num, str);
-	pthread_mutex_unlock(&(philo->rule->right_to_output));
-	return time;
-}
-
 void take_fork(t_philo *philo, t_bool is_bigger)
 {
 
@@ -51,7 +40,7 @@ void *philo_routine(void *p)
 	t_philo *philo = (t_philo *)p;
 
 	philo->last_meal_time = get_time_in_ms();
-	while (1)
+	while (philo->rule->dead_exists == FALSE)
 	{
 		take_fork(philo, TRUE);
 		take_fork(philo, FALSE);
