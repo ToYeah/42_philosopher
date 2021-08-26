@@ -1,5 +1,5 @@
 NAME		= philo
-SRCS		= srcs/input_arg_utils.c srcs/philo_routine.c srcs/philo.c srcs/input_arg.c 
+SRCS		= srcs/input_arg_utils.c srcs/philo_routine.c srcs/philo.c srcs/doctor.c srcs/input_arg.c srcs/thread_utils.c 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -pthread
 OBJS		= $(SRCS:.c=.o)
