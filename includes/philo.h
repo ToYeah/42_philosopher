@@ -34,6 +34,7 @@ typedef struct s_rule
 	pthread_mutex_t right_to_output;
 	pthread_mutex_t right_to_consultation;
 	t_bool  dead_exists;
+	t_bool odd_flag;
 } t_rule;
 
 struct s_fork

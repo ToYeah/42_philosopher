@@ -29,6 +29,8 @@ void sleep_philo(t_philo *philo)
 void think_philo(t_philo *philo)
 {
 	record_philo_action(philo, MSG_THINK);
+	if (philo->rule->odd_flag)
+		philo_usleep(philo->rule->time_to_eat);
 }
 
 void *philo_routine(void *p)

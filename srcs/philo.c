@@ -77,6 +77,9 @@ void init_rule(t_rule *rule, int argc, char **argv)
 
 	create_res = 0;
 	input_arg(rule, argc, argv);
+	rule->odd_flag = TRUE;
+	if (rule->num % 2 == 0)
+		rule->odd_flag = FALSE;
 	create_res += pthread_mutex_init(&(rule->right_to_output), NULL);
 	create_res += pthread_mutex_init(&(rule->right_to_consultation), NULL);
 	if (create_res != 0)
