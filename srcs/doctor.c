@@ -19,11 +19,7 @@ void *doctor_routine(void *p)
 
 	while (philo->rule->dead_exists == FALSE)
 	{
-		if (usleep(1000) != 0)
-		{
-				//error
-			exit(1);
-		}
+		usleep(1000);
 		pthread_mutex_lock(&(philo->rule->right_to_consultation));
 		pthread_mutex_lock(&(philo->rule->right_to_output));
 		if (is_philo_arive(philo) == FALSE)

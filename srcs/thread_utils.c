@@ -4,11 +4,7 @@ long get_time_in_us()
 {
 	t_time now;
 
-	if (gettimeofday(&now, NULL))
-	{
-		//error
-		exit(1);
-	}
+	gettimeofday(&now, NULL);
 	return ((long)(now.tv_sec * 1000000 + now.tv_usec));
 }
 
@@ -28,11 +24,7 @@ void philo_usleep(long time)
 		now = get_time_in_us();
 		if (now - start >= time * 1000)
 			break;
-		if (usleep(1000) != 0)
-		{
-				//errpr
-			exit(1);
-		}
+		usleep(1000);
 	}
 }
 
