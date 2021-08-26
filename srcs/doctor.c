@@ -19,7 +19,7 @@ void *doctor_routine(void *p)
 
 	while (philo->rule->dead_exists == FALSE)
 	{
-		if (usleep(200) != 0)
+		if (usleep(1000) != 0)
 		{
 				//error
 			exit(1);
