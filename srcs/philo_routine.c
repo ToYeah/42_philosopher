@@ -42,11 +42,11 @@ void *philo_routine(void *p)
 	philo->last_meal_time = get_time_in_ms();
 	while (philo->rule->dead_exists == FALSE)
 	{
-		take_fork(philo, TRUE);
 		take_fork(philo, FALSE);
+		take_fork(philo, TRUE);
 		eat_meal(philo);
-		put_fork(philo, FALSE);
 		put_fork(philo, TRUE);
+		put_fork(philo, FALSE);
 		sleep_philo(philo);
 		think_philo(philo);
 	}

@@ -25,22 +25,17 @@ t_fork *init_forks(long count)
 	return res;
 }
 
-void init_philosophers_fork(t_philo *philo, t_fork *forks, long count)
+void init_philosophers_fork(t_philo *philo, t_fork *forks)
 {
-	long fork_index;
-
-	fork_index = philo->num - 1;
-	if (fork_index < 0)
-		fork_index = count;
-	if (fork_index < philo->num)
+	if (philo->num == 1)
 	{
-		philo->bigger = &(forks[philo->num]);
-		philo->smaller = &(forks[fork_index]);
+		philo->smaller = &(forks[philo->num - 1]);
+		philo->bigger = &(forks[philo->rule->num - 1]);
 	}
 	else
 	{
-		philo->bigger = &(forks[fork_index]);
-		philo->smaller = &(forks[philo->num]);
+		philo->smaller = &(forks[philo->num - 2]);
+		philo->bigger = &(forks[philo->num - 1]);
 	}
 }
 
@@ -63,7 +58,7 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 		res[i].num = i + 1;
 		res[i].rule = rule;
 		res[i].last_meal_time = get_time_in_ms();
-		init_philosophers_fork(&(res[i]), forks, count);
+		init_philosophers_fork(&(res[i]), forks);
 		create_res += pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i]));
 		create_res += pthread_create(&(res[i].doctor), NULL, doctor_routine, &(res[i]));
 		if (create_res != 0)
