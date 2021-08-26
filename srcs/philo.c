@@ -7,18 +7,15 @@ t_fork *init_forks(long count)
 
 	res = malloc(sizeof(t_fork) * count);
 	if (!res)
-	{
-		//error
-		exit(1);
-	}
+		return (NULL);
 	i = 0;
 	while (i < count)
 	{
 		res[i].weight = i;
 		if (pthread_mutex_init(&(res[i].mutex), NULL) != 0)
 		{
-			//error
-			exit(1);
+			free(res);
+			return (NULL);
 		}
 		i++;
 	}
@@ -108,6 +105,8 @@ int main(int argc, char **argv)
 	if (!init_rule(&rule, argc, argv))
 		return (1);
 	forks = init_forks(rule.num);
+	if (!forks)
+		return (1);
 	philosophers = init_philosophers(rule.num, forks, &(rule));
 	join_philosophers(philosophers, rule.num);
 }
