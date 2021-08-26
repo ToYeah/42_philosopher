@@ -19,6 +19,11 @@ void *doctor_routine(void *p)
 
 	while (philo->rule->dead_exists == FALSE)
 	{
+		if (usleep(200) != 0)
+		{
+				//error
+			exit(1);
+		}
 		pthread_mutex_lock(&(philo->rule->right_to_consultation));
 		pthread_mutex_lock(&(philo->rule->right_to_output));
 		if (is_philo_arive(philo) == FALSE)
@@ -26,14 +31,6 @@ void *doctor_routine(void *p)
 			philo->rule->dead_exists = TRUE;
 			printf("%ld %ld %s\n", get_time_in_ms(), philo->num, MSG_DIE);
 			exit(1);
-		}
-		else{
-
-		if (usleep(1000) != 0)
-		{
-				//error
-			exit(1);
-		}
 		}
 		pthread_mutex_unlock(&(philo->rule->right_to_output));
 		pthread_mutex_unlock(&(philo->rule->right_to_consultation));
