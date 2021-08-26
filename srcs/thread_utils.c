@@ -22,11 +22,11 @@ void philo_usleep(long time)
 	long start;
 	long now;
 
-	start = get_time_in_ms();
+	start = get_time_in_us();
 	while(1)
 	{
-		now = get_time_in_ms();
-		if (now - start >= time)
+		now = get_time_in_us();
+		if (now - start >= time * 1000)
 			break;
 		if (usleep(1000) != 0)
 		{
