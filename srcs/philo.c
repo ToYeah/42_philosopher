@@ -71,23 +71,19 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 	return res;
 }
 
-void init_rule(t_rule *rule, int argc, char **argv)
+t_bool init_rule(t_rule *rule, int argc, char **argv)
 {
-	int create_res;
-
-	create_res = 0;
-	input_arg(rule, argc, argv);
+	if (!input_arg(rule, argc, argv) ||
+		pthread_mutex_init(&(rule->right_to_output), NULL) ||
+		pthread_mutex_init(&(rule->right_to_consultation), NULL))
+	{
+		return (FALSE);
+	}
+	rule->dead_exists = FALSE;
 	rule->odd_flag = TRUE;
 	if (rule->num % 2 == 0)
 		rule->odd_flag = FALSE;
-	create_res += pthread_mutex_init(&(rule->right_to_output), NULL);
-	create_res += pthread_mutex_init(&(rule->right_to_consultation), NULL);
-	if (create_res != 0)
-	{
-		//error
-		exit(1);
-	}
-	rule->dead_exists = FALSE;
+	return (TRUE);
 }
 
 void join_philosophers(t_philo *philos, long count)
@@ -109,7 +105,8 @@ int main(int argc, char **argv)
 	t_fork *forks;
 	t_rule rule;
 
-	init_rule(&rule, argc, argv);
+	if (!init_rule(&rule, argc, argv))
+		return (1);
 	forks = init_forks(rule.num);
 	philosophers = init_philosophers(rule.num, forks, &(rule));
 	join_philosophers(philosophers, rule.num);

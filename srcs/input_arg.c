@@ -21,20 +21,17 @@ t_bool input_option_arg(t_rule *rule, long argc, char **argv)
     return (input_num_arg(&(rule->option), argv[5]));
 }
 
-void input_arg(t_rule *rule, int argc, char **argv)
+t_bool input_arg(t_rule *rule, int argc, char **argv)
 {
-    if (argc < 5 || argc > 6)
+    if ((argc != 5 && argc != 6) ||
+        !input_num_arg(&(rule->num), argv[1]) ||
+        !input_num_arg(&(rule->time_to_die), argv[2]) ||
+        !input_num_arg(&(rule->time_to_eat), argv[3]) ||
+        !input_num_arg(&(rule->time_to_sleep), argv[4]) ||
+        !input_option_arg(rule, argc, argv))
     {
-        printf("Invalid arguments\n");
-        exit(1);
+        printf("Invalid argument format.\n");
+        return (FALSE);
     }
-    if (!(input_num_arg(&(rule->num), argv[1]) &&
-        input_num_arg(&(rule->time_to_die), argv[2]) &&
-        input_num_arg(&(rule->time_to_eat), argv[3]) &&
-        input_num_arg(&(rule->time_to_sleep), argv[4]) &&
-        input_option_arg(rule, argc, argv)))
-    {
-        //error
-        exit(1);
-    }
+    return (TRUE);
 }
