@@ -40,15 +40,10 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 {
 	t_philo *res;
 	long i;
-	int create_res;
 
 	res = malloc(sizeof(t_philo) * count);
-	create_res = 0;
 	if (!res)
-	{
-		//error
-		exit(1);
-	}
+		return (NULL);
 	i = 0;
 	while (i < count)
 	{
@@ -56,12 +51,11 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 		res[i].rule = rule;
 		res[i].last_meal_time = get_time_in_ms();
 		init_philosophers_fork(&(res[i]), forks);
-		create_res += pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i]));
-		create_res += pthread_create(&(res[i].doctor), NULL, doctor_routine, &(res[i]));
-		if (create_res != 0)
+		if (pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i])) ||
+			pthread_create(&(res[i].doctor), NULL, doctor_routine, &(res[i])))
 		{
-			//error
-			exit(1);
+			free(res);
+			return (NULL);
 		}
 		i++;
 	}
@@ -108,5 +102,7 @@ int main(int argc, char **argv)
 	if (!forks)
 		return (1);
 	philosophers = init_philosophers(rule.num, forks, &(rule));
+	if (!philosophers)
+		return (1);
 	join_philosophers(philosophers, rule.num);
 }
