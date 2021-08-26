@@ -22,11 +22,10 @@ void *doctor_routine(void *p)
 		usleep(1000);
 		pthread_mutex_lock(&(philo->rule->right_to_consultation));
 		pthread_mutex_lock(&(philo->rule->right_to_output));
-		if (is_philo_arive(philo) == FALSE)
+		if (is_philo_arive(philo) == FALSE && philo->rule->dead_exists == FALSE)
 		{
 			philo->rule->dead_exists = TRUE;
 			printf("%ld %ld %s\n", get_time_in_ms(), philo->num, MSG_DIE);
-			exit(1);
 		}
 		pthread_mutex_unlock(&(philo->rule->right_to_output));
 		pthread_mutex_unlock(&(philo->rule->right_to_consultation));
