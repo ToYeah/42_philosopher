@@ -35,6 +35,7 @@ typedef struct s_rule
 	pthread_mutex_t right_to_consultation;
 	t_bool  dead_exists;
 	t_bool odd_flag;
+	long full_philo_count;
 } t_rule;
 
 struct s_fork
@@ -52,6 +53,7 @@ struct s_philo
 	long last_meal_time;
 	long num;
 	t_rule *rule;
+	long eat_count;
 };
 
 void *philo_routine(void *p);

@@ -34,7 +34,7 @@ long record_philo_action(t_philo *philo, const char *str)
 
 	pthread_mutex_lock(&(philo->rule->right_to_output));
 	time = get_time_in_ms();
-	if (philo->rule->dead_exists == FALSE)
+	if (philo->rule->dead_exists == FALSE && philo->rule->full_philo_count != philo->rule->num)
 		printf("%ld %ld %s\n", time, philo->num, str);
 	pthread_mutex_unlock(&(philo->rule->right_to_output));
 	return time;

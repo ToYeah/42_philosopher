@@ -18,6 +18,9 @@ void eat_meal(t_philo *philo)
 {
 	philo->last_meal_time = record_philo_action(philo, MSG_EAT);
 	philo_usleep(philo->rule->time_to_eat);
+	philo->eat_count += 1;
+	if (philo->eat_count == philo->rule->option)
+		philo->rule->full_philo_count += 1;
 }
 
 void sleep_philo(t_philo *philo)
@@ -42,7 +45,7 @@ void *philo_routine(void *p)
 		philo_usleep(1);
 	}
 	philo->last_meal_time = get_time_in_ms();
-	while (philo->rule->dead_exists == FALSE)
+	while (philo->rule->dead_exists == FALSE && philo->rule->full_philo_count != philo->rule->num)
 	{
 		take_fork(philo);
 		eat_meal(philo);

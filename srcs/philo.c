@@ -49,6 +49,7 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 	{
 		res[i].num = i + 1;
 		res[i].rule = rule;
+		res[i].eat_count = 0;
 		res[i].last_meal_time = get_time_in_ms();
 		init_philosophers_fork(&(res[i]), forks);
 		if (pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i])) ||
@@ -71,6 +72,7 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 		return (FALSE);
 	}
 	rule->dead_exists = FALSE;
+	rule->full_philo_count = 0;
 	rule->odd_flag = TRUE;
 	if (rule->num % 2 == 0)
 		rule->odd_flag = FALSE;

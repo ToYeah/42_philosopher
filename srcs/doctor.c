@@ -17,7 +17,7 @@ void *doctor_routine(void *p)
 
 	philo = (t_philo *)p;
 
-	while (philo->rule->dead_exists == FALSE)
+	while (philo->rule->dead_exists == FALSE && philo->rule->full_philo_count != philo->rule->num)
 	{
 		usleep(1000);
 		pthread_mutex_lock(&(philo->rule->right_to_consultation));
