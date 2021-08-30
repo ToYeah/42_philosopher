@@ -107,4 +107,6 @@ int main(int argc, char **argv)
 	if (!philosophers)
 		return (1);
 	join_philosophers(philosophers, rule.num);
+	free(philosophers);
+	free(forks);
 }
