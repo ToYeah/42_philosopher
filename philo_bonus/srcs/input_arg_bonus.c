@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "philo_bonus.h"
 
 t_bool input_num_arg(long *dest, char *str)
 {

@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "philo_bonus.h"
 
 t_bool ft_atol_limit(const char *str, long *return_value)
 {

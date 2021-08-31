@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "philo_bonus.h"
 
 t_bool init_rule(t_rule *rule, int argc, char **argv)
 {

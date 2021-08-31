@@ -1,5 +1,5 @@
 NAME		= philo_bonus
-SRCS		= srcs/input_arg_utils.c srcs/input_arg.c srcs/philo_bonus.c 
+SRCS		= srcs/input_arg_utils_bonus.c srcs/philo_bonus.c srcs/input_arg_bonus.c 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -pthread
 OBJS		= $(SRCS:.c=.o)
