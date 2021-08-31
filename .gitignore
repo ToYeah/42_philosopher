@@ -2,3 +2,5 @@ a.out
 42_minishell
 .vscode
 *.o
+philo/philo
+philo_bonus/philo_bonus
