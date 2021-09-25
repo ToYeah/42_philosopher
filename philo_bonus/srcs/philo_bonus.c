@@ -1,12 +1,40 @@
 #include "philo_bonus.h"
 
+t_bool init_philosophers(t_rule *rule, t_philo **philo)
+{
+	t_philo* res;
+	int i;
+
+	res = malloc(sizeof(t_philo) * rule->num);
+	if (!res)
+	{
+		return (FALSE);
+		//error
+	}
+	i = 0;
+	while (i > rule->num)
+	{
+		res[i].rule = rule;
+	}
+	*philo = res;
+	return (TRUE);
+}
+
+t_bool init_forks(t_rule *rule)
+{
+	rule->fork_sem = sem_open(SEM_FORK, O_CREAT | O_EXCL, S_IRWXU, rule->num);
+	if (rule->fork_sem == SEM_FAILED)
+		return (FALSE);
+	return (TRUE);
+}
+
 t_bool init_rule(t_rule *rule, int argc, char **argv)
 {
 	if (!input_arg(rule, argc, argv))
 		return (FALSE);
 	if (rule->option_exists)
 	{
-		rule->eat_count = sem_open(SEM_EAT_COUNT, O_CREAT | O_EXCL, S_IRWXU, rule->option);
+		rule->eat_count = sem_open(SEM_OPTION, O_CREAT | O_EXCL, S_IRWXU, rule->option);
 		if (rule->eat_count == SEM_FAILED)
 			return (FALSE);
 	}
@@ -21,7 +49,14 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 int main(int argc, char **argv)
 {
 	t_rule rule;
+	t_philo *philo;
 
 	if (!init_rule(&rule, argc, argv))
 		return (1);
+	if (!init_forks(&rule))
+		return (1);
+	if (!init_philosophers(&rule, &philo))
+		return (1);
+	sem_unlink(SEM_OPTION);
+	sem_unlink(SEM_FORK);
 }

@@ -13,7 +13,8 @@
 #define MSG_SLEEP "is sleeping"
 #define MSG_THINK "is thinking"
 #define MSG_DIE "died"
-#define SEM_EAT_COUNT "eat_count"
+#define SEM_OPTION "/option"
+#define SEM_FORK "/fork"
 
 typedef struct s_philo t_philo;
 
@@ -39,7 +40,17 @@ typedef struct s_rule
 	t_bool odd_flag;
 	long full_philo_count;
 	sem_t *eat_count;
+	sem_t *fork_sem;
 } t_rule;
+
+
+struct s_philo
+{
+	pthread_t doctor;
+	long last_meal_time;
+	t_rule *rule;
+	long eat_count;
+};
 
 t_bool input_arg(t_rule *rule, int argc, char **argv);
 
