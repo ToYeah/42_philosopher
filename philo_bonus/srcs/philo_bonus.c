@@ -46,6 +46,7 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 	rule->output_sem = sem_open(SEM_OUTPUT, O_CREAT | O_EXCL, S_IRWXU, 1);
 	if (rule->output_sem == SEM_FAILED)
 		return (FALSE);
+
 	rule->dead_exists = FALSE;
 	rule->full_philo_count = 0;
 	rule->odd_flag = TRUE;
@@ -54,11 +55,20 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 	return (TRUE);
 }
 
+void delete_semaphores(void)
+{
+	sem_unlink(SEM_OPTION);
+	sem_unlink(SEM_FORK);
+	sem_unlink(SEM_DEAD);
+	sem_unlink(SEM_OUTPUT);
+}
+
 int main(int argc, char **argv)
 {
 	t_rule rule;
 	t_philo *philo;
 
+	delete_semaphores();
 	if (!init_rule(&rule, argc, argv))
 		return (1);
 	if (!init_forks(&rule))
@@ -66,8 +76,5 @@ int main(int argc, char **argv)
 	if (!init_philosophers(&rule, &philo))
 		return (1);
 	start_philos(&rule, philo);
-	sem_unlink(SEM_OPTION);
-	sem_unlink(SEM_FORK);
-	sem_unlink(SEM_DEAD);
-	sem_unlink(SEM_OUTPUT);
+	delete_semaphores();
 }

@@ -1,12 +1,5 @@
 #include "philo_bonus.h"
 
-
-void philo_routine(t_philo *philo)
-{
-	printf("hello %ld\n", philo->num);
-	exit(0);
-}
-
 void wait_philos(t_rule *rule, t_philo *philo)
 {
 	
