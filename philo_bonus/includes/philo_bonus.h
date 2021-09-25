@@ -4,12 +4,16 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <limits.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <semaphore.h>
 
 #define MSG_FORK "has taken a fork"
 #define MSG_EAT "is eating"
 #define MSG_SLEEP "is sleeping"
 #define MSG_THINK "is thinking"
 #define MSG_DIE "died"
+#define SEM_EAT_COUNT "eat_count"
 
 typedef struct s_philo t_philo;
 
@@ -34,6 +38,7 @@ typedef struct s_rule
 	t_bool  dead_exists;
 	t_bool odd_flag;
 	long full_philo_count;
+	sem_t *eat_count;
 } t_rule;
 
 t_bool input_arg(t_rule *rule, int argc, char **argv);
