@@ -12,9 +12,10 @@ t_bool init_philosophers(t_rule *rule, t_philo **philo)
 		//error
 	}
 	i = 0;
-	while (i > rule->num)
+	while (i < rule->num)
 	{
 		res[i].rule = rule;
+		i++;
 	}
 	*philo = res;
 	return (TRUE);
