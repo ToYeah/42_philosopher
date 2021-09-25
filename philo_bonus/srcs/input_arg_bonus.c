@@ -14,6 +14,7 @@ t_bool input_option_arg(t_rule *rule, long argc, char **argv)
 {
     if (argc != 6)
     {
+        //error unsigned int
         rule->option_exists = FALSE;
         return (TRUE);
     }
