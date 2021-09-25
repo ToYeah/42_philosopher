@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <semaphore.h>
+#include <sys/wait.h>
 
 #define MSG_FORK "has taken a fork"
 #define MSG_EAT "is eating"
@@ -50,11 +51,14 @@ struct s_philo
 {
 	pthread_t doctor;
 	long last_meal_time;
+	long num;
 	t_rule *rule;
 	long eat_count;
+	pid_t pid;
 };
 
 t_bool input_arg(t_rule *rule, int argc, char **argv);
 
 t_bool ft_atol_limit(const char *str, long *return_value);
 t_bool is_num_str(char *str);
+void start_philos(t_rule *rule, t_philo *philo);

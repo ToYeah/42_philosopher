@@ -15,6 +15,7 @@ t_bool init_philosophers(t_rule *rule, t_philo **philo)
 	while (i < rule->num)
 	{
 		res[i].rule = rule;
+		res[i].num = i + 1;
 		i++;
 	}
 	*philo = res;
@@ -61,8 +62,8 @@ int main(int argc, char **argv)
 		return (1);
 	if (!init_philosophers(&rule, &philo))
 		return (1);
+	start_philos(&rule, philo);
 	sem_unlink(SEM_OPTION);
 	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_DEAD);
-	printf("aa");
 }
