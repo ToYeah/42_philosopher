@@ -15,6 +15,7 @@
 #define MSG_DIE "died"
 #define SEM_OPTION "/option"
 #define SEM_FORK "/fork"
+#define SEM_DEAD "/dead"
 
 typedef struct s_philo t_philo;
 
@@ -39,8 +40,9 @@ typedef struct s_rule
 	t_bool  dead_exists;
 	t_bool odd_flag;
 	long full_philo_count;
-	sem_t *eat_count;
+	sem_t *option_sem;
 	sem_t *fork_sem;
+	sem_t *dead_sem;
 } t_rule;
 
 

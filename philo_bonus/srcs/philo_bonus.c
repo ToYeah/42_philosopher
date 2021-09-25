@@ -34,10 +34,13 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 		return (FALSE);
 	if (rule->option_exists)
 	{
-		rule->eat_count = sem_open(SEM_OPTION, O_CREAT | O_EXCL, S_IRWXU, rule->option);
-		if (rule->eat_count == SEM_FAILED)
+		rule->option_sem = sem_open(SEM_OPTION, O_CREAT | O_EXCL, S_IRWXU, rule->option);
+		if (rule->option_sem == SEM_FAILED)
 			return (FALSE);
 	}
+	rule->dead_sem = sem_open(SEM_DEAD, O_CREAT | O_EXCL, S_IRWXU, rule->num);
+	if (rule->dead_sem == SEM_FAILED)
+		return (FALSE);
 	rule->dead_exists = FALSE;
 	rule->full_philo_count = 0;
 	rule->odd_flag = TRUE;
@@ -59,4 +62,6 @@ int main(int argc, char **argv)
 		return (1);
 	sem_unlink(SEM_OPTION);
 	sem_unlink(SEM_FORK);
+	sem_unlink(SEM_DEAD);
+	printf("aa");
 }
