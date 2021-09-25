@@ -43,6 +43,9 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 	rule->dead_sem = sem_open(SEM_DEAD, O_CREAT | O_EXCL, S_IRWXU, rule->num);
 	if (rule->dead_sem == SEM_FAILED)
 		return (FALSE);
+	rule->output_sem = sem_open(SEM_OUTPUT, O_CREAT | O_EXCL, S_IRWXU, 1);
+	if (rule->output_sem == SEM_FAILED)
+		return (FALSE);
 	rule->dead_exists = FALSE;
 	rule->full_philo_count = 0;
 	rule->odd_flag = TRUE;
@@ -66,4 +69,5 @@ int main(int argc, char **argv)
 	sem_unlink(SEM_OPTION);
 	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_DEAD);
+	sem_unlink(SEM_OUTPUT);
 }

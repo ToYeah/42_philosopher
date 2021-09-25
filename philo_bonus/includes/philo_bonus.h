@@ -17,6 +17,7 @@
 #define SEM_OPTION "/option"
 #define SEM_FORK "/fork"
 #define SEM_DEAD "/dead"
+#define SEM_OUTPUT "/output"
 
 typedef struct s_philo t_philo;
 
@@ -44,6 +45,7 @@ typedef struct s_rule
 	sem_t *option_sem;
 	sem_t *fork_sem;
 	sem_t *dead_sem;
+	sem_t *output_sem;
 } t_rule;
 
 
