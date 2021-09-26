@@ -19,6 +19,8 @@ void eat_meal(t_philo *philo)
 	philo->last_meal_time = record_philo_action(philo, MSG_EAT);
 	philo_usleep(philo->rule->time_to_eat);
 	philo->eat_count += 1;
+	if (philo->rule->option_exists && philo->eat_count == philo->rule->option)
+		sem_post(philo->rule->option_sem);
 }
 
 void sleep_philo(t_philo *philo)

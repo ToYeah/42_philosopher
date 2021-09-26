@@ -48,6 +48,7 @@ typedef struct s_rule
 	sem_t *dead_sem;
 	sem_t *output_sem;
 	sem_t *consul_sem;
+	pthread_t option_observer;
 } t_rule;
 
 

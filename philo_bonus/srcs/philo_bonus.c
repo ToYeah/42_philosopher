@@ -36,7 +36,7 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 		return (FALSE);
 	if (rule->option_exists)
 	{
-		rule->option_sem = sem_open(SEM_OPTION, O_CREAT | O_EXCL, S_IRWXU, rule->option);
+		rule->option_sem = sem_open(SEM_OPTION, O_CREAT | O_EXCL, S_IRWXU, 0);
 		if (rule->option_sem == SEM_FAILED)
 			return (FALSE);
 	}
