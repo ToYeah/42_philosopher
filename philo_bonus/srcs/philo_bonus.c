@@ -45,6 +45,7 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 		return (FALSE);
 	rule->output_sem = sem_open(SEM_OUTPUT, O_CREAT | O_EXCL, S_IRWXU, 1);
 	if (rule->output_sem == SEM_FAILED)
+		return (FALSE);
 	rule->consul_sem = sem_open(SEM_CONSUL, O_CREAT | O_EXCL, S_IRWXU, 1);
 	if (rule->consul_sem == SEM_FAILED)
 		return (FALSE);
