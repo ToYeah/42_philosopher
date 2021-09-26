@@ -18,6 +18,7 @@
 #define SEM_FORK "/fork"
 #define SEM_DEAD "/dead"
 #define SEM_OUTPUT "/output"
+#define SEM_CONSUL "/consul"
 
 typedef struct s_philo t_philo;
 
@@ -46,12 +47,14 @@ typedef struct s_rule
 	sem_t *fork_sem;
 	sem_t *dead_sem;
 	sem_t *output_sem;
+	sem_t *consul_sem;
 } t_rule;
 
 
 struct s_philo
 {
 	pthread_t doctor;
+	pthread_t nurse;
 	long last_meal_time;
 	long num;
 	t_rule *rule;
@@ -69,3 +72,5 @@ long get_time_in_ms();
 void philo_usleep(long time);
 long record_philo_action(t_philo *philo, const char *str);
 void philo_routine(t_philo *philo);
+void *nurse_routine(void *p);
+void *doctor_routine(void *p);

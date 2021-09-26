@@ -40,11 +40,13 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 		if (rule->option_sem == SEM_FAILED)
 			return (FALSE);
 	}
-	rule->dead_sem = sem_open(SEM_DEAD, O_CREAT | O_EXCL, S_IRWXU, rule->num);
+	rule->dead_sem = sem_open(SEM_DEAD, O_CREAT | O_EXCL, S_IRWXU, 0);
 	if (rule->dead_sem == SEM_FAILED)
 		return (FALSE);
 	rule->output_sem = sem_open(SEM_OUTPUT, O_CREAT | O_EXCL, S_IRWXU, 1);
 	if (rule->output_sem == SEM_FAILED)
+	rule->consul_sem = sem_open(SEM_CONSUL, O_CREAT | O_EXCL, S_IRWXU, 1);
+	if (rule->consul_sem == SEM_FAILED)
 		return (FALSE);
 
 	rule->dead_exists = FALSE;
@@ -61,6 +63,7 @@ void delete_semaphores(void)
 	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_DEAD);
 	sem_unlink(SEM_OUTPUT);
+	sem_unlink(SEM_CONSUL);
 }
 
 int main(int argc, char **argv)
