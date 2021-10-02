@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <semaphore.h>
 #include <sys/wait.h>
+#include <limits.h>
 
 #define MSG_FORK "has taken a fork"
 #define MSG_EAT "is eating"

@@ -3,7 +3,8 @@
 t_bool input_num_arg(long *dest, char *str)
 {
     if (is_num_str(str) &&
-        ft_atol_limit(str, dest))
+        ft_atol_limit(str, dest) &&
+        *dest <= UINT_MAX)
     {
         return (TRUE);
     }
@@ -14,7 +15,6 @@ t_bool input_option_arg(t_rule *rule, long argc, char **argv)
 {
     if (argc != 6)
     {
-        //error unsigned int
         rule->option_exists = FALSE;
         return (TRUE);
     }
