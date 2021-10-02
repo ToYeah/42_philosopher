@@ -9,7 +9,12 @@ void wait_philos(t_rule *rule, t_philo *philo)
 	i = 0;
 	while(i < rule->num)
 	{
-		waitpid(philo->pid, &status, 0);
+		waitpid(0, &status, 0);
+		if (WEXITSTATUS(status))
+		{
+			printf("Child process has error\n");
+			exit(1);
+		}
 		i++;
 	}
 }
