@@ -38,14 +38,9 @@ void think_philo(t_philo *philo)
 
 void philo_routine(t_philo *philo)
 {
-	if (pthread_create(&(philo->nurse), NULL, nurse_routine, philo))
+	if (pthread_create(&(philo->nurse), NULL, nurse_routine, philo) ||
+		pthread_create(&(philo->doctor), NULL, doctor_routine, philo))
 	{
-		//error
-		exit(1);
-	}
-	if (pthread_create(&(philo->doctor), NULL, doctor_routine, philo))
-	{
-		//error
 		exit(1);
 	}
 	if (philo->num % 2 == 0)
