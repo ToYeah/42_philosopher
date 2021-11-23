@@ -46,8 +46,8 @@ void start_philos(t_rule *rule, t_philo *philo)
 		philo[i].pid = fork();
 		if (philo[i].pid == -1)
 		{
-			//error
-			exit(1);
+			printf("%s\n", ERROR_MESSAGE);
+			exit(EXIT_FAILURE);
 		}
 		if (philo[i].pid == 0)
 		{
@@ -59,8 +59,8 @@ void start_philos(t_rule *rule, t_philo *philo)
 	{
 		if (pthread_create(&(rule->option_observer), NULL, observe_option, rule))
 		{
-			//error
-			exit(1);
+			printf("%s\n", ERROR_MESSAGE);
+			exit(EXIT_FAILURE);
 		}
 	}
 	wait_philos(rule);

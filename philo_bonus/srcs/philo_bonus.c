@@ -9,7 +9,8 @@ t_bool init_philosophers(t_rule *rule, t_philo **philo)
 	if (!res)
 	{
 		return (FALSE);
-		//error
+		printf("%s\n", ERROR_MESSAGE);
+		exit(EXIT_FAILURE);
 	}
 	i = 0;
 	while (i < rule->num)
