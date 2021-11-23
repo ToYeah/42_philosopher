@@ -13,6 +13,7 @@ t_bool input_num_arg(long *dest, char *str)
 
 t_bool input_option_arg(t_rule *rule, long argc, char **argv)
 {
+    rule->option = 0;
     if (argc != 6)
     {
         rule->option_exists = FALSE;

@@ -16,6 +16,7 @@ t_bool init_philosophers(t_rule *rule, t_philo **philo)
 	{
 		res[i].rule = rule;
 		res[i].num = i + 1;
+		res[i].eat_count = 0;
 		i++;
 	}
 	*philo = res;
