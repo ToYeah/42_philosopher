@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int		judge_sign(const char c)
+int	judge_sign(const char c)
 {
 	if (c == '-')
 		return (-1);
