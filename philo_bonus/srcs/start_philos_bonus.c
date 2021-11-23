@@ -1,6 +1,6 @@
 #include "philo_bonus.h"
 
-void wait_philos(t_rule *rule, t_philo *philo)
+void wait_philos(t_rule *rule)
 {
 	
 	int i;
@@ -63,5 +63,5 @@ void start_philos(t_rule *rule, t_philo *philo)
 			exit(1);
 		}
 	}
-	wait_philos(rule, philo);
+	wait_philos(rule);
 }
