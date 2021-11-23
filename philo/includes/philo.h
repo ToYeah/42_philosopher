@@ -54,6 +54,7 @@ struct s_philo
 	long num;
 	t_rule *rule;
 	long eat_count;
+	pthread_mutex_t right_to_meal_time;
 };
 
 void *philo_routine(void *p);
@@ -68,3 +69,6 @@ long get_time_in_ms();
 void philo_usleep(long time);
 long record_philo_action(t_philo *philo, const char *str);
 void *doctor_routine(void *p);
+
+void write_meal_time(t_philo *philo, long time);
+long read_meal_time(t_philo *philo);

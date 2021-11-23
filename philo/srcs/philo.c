@@ -52,7 +52,8 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 		res[i].eat_count = 0;
 		res[i].last_meal_time = get_time_in_ms();
 		init_philosophers_fork(&(res[i]), forks);
-		if (pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i])) ||
+		if (pthread_mutex_init(&(res[i].right_to_meal_time), NULL) ||
+			pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i])) ||
 			pthread_create(&(res[i].doctor), NULL, doctor_routine, &(res[i])))
 		{
 			free(res);
