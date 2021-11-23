@@ -1,9 +1,9 @@
 #include "philo.h"
 
-t_fork *init_forks(long count)
+t_fork	*init_forks(long count)
 {
-	t_fork *res;
-	long i;
+	t_fork	*res;
+	long	i;
 
 	res = malloc(sizeof(t_fork) * count);
 	if (!res)
@@ -19,10 +19,10 @@ t_fork *init_forks(long count)
 		}
 		i++;
 	}
-	return res;
+	return (res);
 }
 
-void init_philosophers_fork(t_philo *philo, t_fork *forks)
+void	init_philosophers_fork(t_philo *philo, t_fork *forks)
 {
 	if (philo->num == 1)
 	{
@@ -36,10 +36,10 @@ void init_philosophers_fork(t_philo *philo, t_fork *forks)
 	}
 }
 
-t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
+t_philo	*init_philosophers(long count, t_fork *forks, t_rule *rule)
 {
-	t_philo *res;
-	long i;
+	t_philo	*res;
+	long	i;
 
 	res = malloc(sizeof(t_philo) * count);
 	if (!res)
@@ -52,23 +52,24 @@ t_philo *init_philosophers(long count, t_fork *forks, t_rule *rule)
 		res[i].eat_count = 0;
 		res[i].last_meal_time = get_time_in_ms();
 		init_philosophers_fork(&(res[i]), forks);
-		if (pthread_mutex_init(&(res[i].right_to_meal_time), NULL) ||
-			pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i])) ||
-			pthread_create(&(res[i].doctor), NULL, doctor_routine, &(res[i])))
+		if (pthread_mutex_init(&(res[i].right_to_meal_time), NULL)
+			|| pthread_create(&(res[i].thread), NULL, philo_routine, &(res[i]))
+			|| pthread_create(&(res[i].doctor),
+				NULL, doctor_routine, &(res[i])))
 		{
 			free(res);
 			return (NULL);
 		}
 		i++;
 	}
-	return res;
+	return (res);
 }
 
-t_bool init_rule(t_rule *rule, int argc, char **argv)
+t_bool	init_rule(t_rule *rule, int argc, char **argv)
 {
-	if (!input_arg(rule, argc, argv) ||
-		pthread_mutex_init(&(rule->right_to_output), NULL) ||
-		pthread_mutex_init(&(rule->right_to_consultation), NULL))
+	if (!input_arg(rule, argc, argv)
+		|| pthread_mutex_init(&(rule->right_to_output), NULL)
+		|| pthread_mutex_init(&(rule->right_to_consultation), NULL))
 	{
 		return (FALSE);
 	}
@@ -80,9 +81,9 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 	return (TRUE);
 }
 
-void join_philosophers(t_philo *philos, long count)
+void	join_philosophers(t_philo *philos, long count)
 {
-	long i;
+	long	i;
 
 	i = 0;
 	while (i < count)
@@ -91,23 +92,4 @@ void join_philosophers(t_philo *philos, long count)
 		pthread_join(philos[i].doctor, NULL);
 		i++;
 	}
-}
-
-int main(int argc, char **argv)
-{
-	t_philo *philosophers;
-	t_fork *forks;
-	t_rule rule;
-
-	if (!init_rule(&rule, argc, argv))
-		return (1);
-	forks = init_forks(rule.num);
-	if (!forks)
-		return (1);
-	philosophers = init_philosophers(rule.num, forks, &(rule));
-	if (!philosophers)
-		return (1);
-	join_philosophers(philosophers, rule.num);
-	free(philosophers);
-	free(forks);
 }

@@ -80,4 +80,10 @@ void	eat_meal(t_philo *philo);
 void	sleep_philo(t_philo *philo);
 void	think_philo(t_philo *philo);
 
+t_fork	*init_forks(long count);
+void	init_philosophers_fork(t_philo *philo, t_fork *forks);
+t_philo	*init_philosophers(long count, t_fork *forks, t_rule *rule);
+t_bool	init_rule(t_rule *rule, int argc, char **argv);
+void	join_philosophers(t_philo *philos, long count);
+
 #endif
