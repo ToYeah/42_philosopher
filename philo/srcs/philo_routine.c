@@ -19,7 +19,7 @@ void eat_meal(t_philo *philo)
 	write_meal_time(philo, record_philo_action(philo, MSG_EAT));
 	philo_usleep(philo->rule->time_to_eat);
 	philo->eat_count += 1;
-	if (philo->eat_count == philo->rule->option)
+	if (philo->rule->option_exists && philo->eat_count == philo->rule->option)
 		philo->rule->full_philo_count += 1;
 }
 
