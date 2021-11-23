@@ -23,7 +23,7 @@ t_bool	input_option_arg(t_rule *rule, long argc, char **argv)
 
 t_bool	input_arg(t_rule *rule, int argc, char **argv)
 {
-	if ((argc != 5 && argc != 6) 
+	if ((argc != 5 && argc != 6)
 		|| !input_num_arg(&(rule->num), argv[1])
 		|| !input_num_arg(&(rule->time_to_die), argv[2])
 		|| !input_num_arg(&(rule->time_to_eat), argv[3])
