@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 20:41:12 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/24 21:03:21 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	philo_usleep(long time, t_rule *rule)
 	long	now;
 
 	start = get_time_in_us();
-	while (1 || !rule->dead_exists)
+	while (rule->dead_exists == FALSE
+		&& rule->full_philo_count != rule->num)
 	{
 		now = get_time_in_us();
 		if (now - start >= time * 1000)
