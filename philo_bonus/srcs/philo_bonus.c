@@ -1,9 +1,9 @@
 #include "philo_bonus.h"
 
-t_bool init_philosophers(t_rule *rule, t_philo **philo)
+t_bool	init_philosophers(t_rule *rule, t_philo **philo)
 {
-	t_philo* res;
-	int i;
+	t_philo		*res;
+	int			i;
 
 	res = malloc(sizeof(t_philo) * rule->num);
 	if (!res)
@@ -24,7 +24,7 @@ t_bool init_philosophers(t_rule *rule, t_philo **philo)
 	return (TRUE);
 }
 
-t_bool init_forks(t_rule *rule)
+t_bool	init_forks(t_rule *rule)
 {
 	rule->fork_sem = sem_open(SEM_FORK, O_CREAT | O_EXCL, S_IRWXU, rule->num);
 	if (rule->fork_sem == SEM_FAILED)
@@ -32,7 +32,7 @@ t_bool init_forks(t_rule *rule)
 	return (TRUE);
 }
 
-t_bool init_rule(t_rule *rule, int argc, char **argv)
+t_bool	init_rule(t_rule *rule, int argc, char **argv)
 {
 	if (!input_arg(rule, argc, argv))
 		return (FALSE);
@@ -43,15 +43,11 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 			return (FALSE);
 	}
 	rule->dead_sem = sem_open(SEM_DEAD, O_CREAT | O_EXCL, S_IRWXU, 0);
-	if (rule->dead_sem == SEM_FAILED)
-		return (FALSE);
 	rule->output_sem = sem_open(SEM_OUTPUT, O_CREAT | O_EXCL, S_IRWXU, 1);
-	if (rule->output_sem == SEM_FAILED)
-		return (FALSE);
 	rule->consul_sem = sem_open(SEM_CONSUL, O_CREAT | O_EXCL, S_IRWXU, 1);
-	if (rule->consul_sem == SEM_FAILED)
+	if (rule->dead_sem == SEM_FAILED
+		|| rule->output_sem == SEM_FAILED || rule->consul_sem == SEM_FAILED)
 		return (FALSE);
-
 	rule->dead_exists = FALSE;
 	rule->full_philo_count = 0;
 	rule->odd_flag = TRUE;
@@ -60,7 +56,7 @@ t_bool init_rule(t_rule *rule, int argc, char **argv)
 	return (TRUE);
 }
 
-void delete_semaphores(void)
+void	delete_semaphores(void)
 {
 	sem_unlink(SEM_OPTION);
 	sem_unlink(SEM_FORK);
@@ -69,10 +65,10 @@ void delete_semaphores(void)
 	sem_unlink(SEM_CONSUL);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_rule rule;
-	t_philo *philo;
+	t_rule	rule;
+	t_philo	*philo;
 
 	delete_semaphores();
 	if (!init_rule(&rule, argc, argv))
