@@ -1,6 +1,6 @@
 #include "philo_bonus.h"
 
-long get_time_in_us()
+long	get_time_in_us(void)
 {
 	struct timeval	now;
 
@@ -8,34 +8,35 @@ long get_time_in_us()
 	return ((long)(now.tv_sec * 1000000 + now.tv_usec));
 }
 
-long get_time_in_ms()
+long	get_time_in_ms(void)
 {
-	return(get_time_in_us() / 1000);
+	return (get_time_in_us() / 1000);
 }
 
-void philo_usleep(long time)
+void	philo_usleep(long time)
 {
-	long start;
-	long now;
+	long	start;
+	long	now;
 
 	start = get_time_in_us();
-	while(1)
+	while (1)
 	{
 		now = get_time_in_us();
 		if (now - start >= time * 1000)
-			break;
+			break ;
 		usleep(1000);
 	}
 }
 
-long record_philo_action(t_philo *philo, const char *str)
+long	record_philo_action(t_philo *philo, const char *str)
 {
-	long time;
+	long	time;
 
 	sem_wait(philo->rule->output_sem);
 	time = get_time_in_ms();
-	if (philo->rule->dead_exists == FALSE && philo->rule->full_philo_count != philo->rule->num)
+	if (philo->rule->dead_exists == FALSE
+		&& philo->rule->full_philo_count != philo->rule->num)
 		printf("%ld %ld %s\n", time, philo->num, str);
 	sem_post(philo->rule->output_sem);
-	return time;
+	return (time);
 }
