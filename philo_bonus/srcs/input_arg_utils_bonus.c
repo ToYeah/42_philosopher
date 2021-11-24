@@ -1,18 +1,25 @@
 #include "philo_bonus.h"
 
-t_bool ft_atol_limit(const char *str, long *return_value)
+int	judge_sign(const char c)
 {
-	int i;
-	int sign;
-	unsigned long div;
-	unsigned long res;
+	if (c == '-')
+		return (-1);
+	return (1);
+}
+
+t_bool	ft_atol_limit(const char *str, long *return_value)
+{
+	int				i;
+	int				sign;
+	unsigned long	div;
+	unsigned long	res;
 
 	i = 0;
 	res = 0;
 	div = LONG_MAX / 10;
 	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
 		i++;
-	sign = str[i] == '-' ? -1 : 1;
+	sign = judge_sign(str[i]);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i] && ('0' <= str[i] && str[i] <= '9'))
@@ -28,9 +35,9 @@ t_bool ft_atol_limit(const char *str, long *return_value)
 	return (TRUE);
 }
 
-t_bool is_num_str(char *str)
+t_bool	is_num_str(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
