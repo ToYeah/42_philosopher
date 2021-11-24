@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 19:02:58 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/24 20:42:44 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_bool	is_num_str(char *str);
 
 long	get_time_in_us(void);
 long	get_time_in_ms(void);
-void	philo_usleep(long time);
+void	philo_usleep(long time, t_rule *rule);
 long	record_philo_action(t_philo *philo, const char *str);
 void	*doctor_routine(void *p);
 

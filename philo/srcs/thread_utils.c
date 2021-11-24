@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 19:03:22 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/24 20:41:12 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ long	get_time_in_ms(void)
 	return (get_time_in_us() / 1000);
 }
 
-void	philo_usleep(long time)
+void	philo_usleep(long time, t_rule *rule)
 {
 	long	start;
 	long	now;
 
 	start = get_time_in_us();
-	while (1)
+	while (1 || !rule->dead_exists)
 	{
 		now = get_time_in_us();
 		if (now - start >= time * 1000)
