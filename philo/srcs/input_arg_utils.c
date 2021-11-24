@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 19:03:06 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/24 21:13:50 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_bool	ft_atol_limit(const char *str, long *return_value)
 		res *= 10;
 		res += str[i++] - '0';
 	}
-	*return_value = (long)res * sign;
+	*return_value = (long)(res * sign);
 	return (TRUE);
 }
 
