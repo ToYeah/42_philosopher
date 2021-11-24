@@ -78,4 +78,10 @@ void	philo_routine(t_philo *philo);
 void	*nurse_routine(void *p);
 void	*doctor_routine(void *p);
 
+void	take_fork(t_philo *philo);
+void	put_fork(t_philo *philo);
+void	eat_meal(t_philo *philo);
+void	sleep_philo(t_philo *philo);
+void	think_philo(t_philo *philo);
+
 #endif
