@@ -1,45 +1,9 @@
 #include "philo_bonus.h"
 
-void take_fork(t_philo *philo)
+void	philo_routine(t_philo *philo)
 {
-	sem_wait(philo->rule->fork_sem);
-	record_philo_action(philo, MSG_FORK);
-	sem_wait(philo->rule->fork_sem);
-	record_philo_action(philo, MSG_FORK);
-}
-
-void put_fork(t_philo *philo)
-{
-	sem_post(philo->rule->fork_sem);
-	sem_post(philo->rule->fork_sem);
-}
-
-void eat_meal(t_philo *philo)
-{
-	philo->last_meal_time = record_philo_action(philo, MSG_EAT);
-	philo_usleep(philo->rule->time_to_eat);
-	philo->eat_count += 1;
-	if (philo->rule->option_exists && philo->eat_count == philo->rule->option)
-		sem_post(philo->rule->option_sem);
-}
-
-void sleep_philo(t_philo *philo)
-{
-	record_philo_action(philo, MSG_SLEEP);
-	philo_usleep(philo->rule->time_to_sleep);
-}
-
-void think_philo(t_philo *philo)
-{
-	record_philo_action(philo, MSG_THINK);
-	if (philo->rule->odd_flag)
-		philo_usleep(philo->rule->time_to_eat);
-}
-
-void philo_routine(t_philo *philo)
-{
-	if (pthread_create(&(philo->nurse), NULL, nurse_routine, philo) ||
-		pthread_create(&(philo->doctor), NULL, doctor_routine, philo))
+	if (pthread_create(&(philo->nurse), NULL, nurse_routine, philo)
+		|| pthread_create(&(philo->doctor), NULL, doctor_routine, philo))
 	{
 		exit(1);
 	}
@@ -56,5 +20,5 @@ void philo_routine(t_philo *philo)
 		sleep_philo(philo);
 		think_philo(philo);
 	}
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
