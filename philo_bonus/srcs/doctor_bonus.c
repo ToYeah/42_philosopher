@@ -1,21 +1,20 @@
 #include "philo_bonus.h"
 
-t_bool is_philo_arive(t_philo *philo)
+t_bool	is_philo_arive(t_philo *philo)
 {
-	long now;
-	
+	long	now;
+
 	now = get_time_in_ms();
 	if (now - philo->last_meal_time >= philo->rule->time_to_die)
-		return FALSE;
-	return TRUE;
+		return (FALSE);
+	return (TRUE);
 }
 
-void *doctor_routine(void *p)
+void	*doctor_routine(void *p)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)p;
-
 	while (philo->rule->dead_exists == FALSE)
 	{
 		usleep(1000);
@@ -33,12 +32,12 @@ void *doctor_routine(void *p)
 	return (NULL);
 }
 
-void *nurse_routine(void *p)
+void	*nurse_routine(void *p)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)p;
 	sem_wait(philo->rule->dead_sem);
 	sem_post(philo->rule->dead_sem);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
