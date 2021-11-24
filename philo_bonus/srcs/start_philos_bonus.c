@@ -1,13 +1,12 @@
 #include "philo_bonus.h"
 
-void wait_philos(t_rule *rule)
+void	wait_philos(t_rule *rule)
 {
-	
-	int i;
-	int status;
+	int	i;
+	int	status;
 
 	i = 0;
-	while(i < rule->num)
+	while (i < rule->num)
 	{
 		waitpid(0, &status, 0);
 		if (WEXITSTATUS(status))
@@ -19,14 +18,14 @@ void wait_philos(t_rule *rule)
 	}
 }
 
-void *observe_option(void *p)
+void	*observe_option(void *p)
 {
-	t_rule *rule;
-	long i;
+	t_rule	*rule;
+	long	i;
 
 	rule = (t_rule *)p;
 	i = 0;
-	while(i < rule->num)
+	while (i < rule->num)
 	{
 		sem_wait(rule->option_sem);
 		i++;
@@ -36,12 +35,25 @@ void *observe_option(void *p)
 	return (NULL);
 }
 
-void start_philos(t_rule *rule, t_philo *philo)
+void	start_option(t_rule *rule)
 {
-	int i;
+	if (rule->option_exists)
+	{
+		if (pthread_create(&(rule->option_observer),
+				NULL, observe_option, rule))
+		{
+			printf("%s\n", ERROR_MESSAGE);
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+void	start_philos(t_rule *rule, t_philo *philo)
+{
+	int	i;
 
 	i = 0;
-	while(i < rule->num)
+	while (i < rule->num)
 	{
 		philo[i].pid = fork();
 		if (philo[i].pid == -1)
@@ -55,13 +67,6 @@ void start_philos(t_rule *rule, t_philo *philo)
 		}
 		i++;
 	}
-	if (rule->option_exists)
-	{
-		if (pthread_create(&(rule->option_observer), NULL, observe_option, rule))
-		{
-			printf("%s\n", ERROR_MESSAGE);
-			exit(EXIT_FAILURE);
-		}
-	}
+	start_option();
 	wait_philos(rule);
 }
