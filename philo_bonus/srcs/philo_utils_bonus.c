@@ -2,7 +2,7 @@
 
 long get_time_in_us()
 {
-	t_time now;
+	struct timeval	now;
 
 	gettimeofday(&now, NULL);
 	return ((long)(now.tv_sec * 1000000 + now.tv_usec));

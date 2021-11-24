@@ -1,78 +1,81 @@
-#include <stdio.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <unistd.h>
-#include <limits.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <semaphore.h>
-#include <sys/wait.h>
-#include <limits.h>
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
-#define MSG_FORK "has taken a fork"
-#define MSG_EAT "is eating"
-#define MSG_SLEEP "is sleeping"
-#define MSG_THINK "is thinking"
-#define MSG_DIE "died"
-#define SEM_OPTION "/option"
-#define SEM_FORK "/fork"
-#define SEM_DEAD "/dead"
-#define SEM_OUTPUT "/output"
-#define SEM_CONSUL "/consul"
+# include <stdio.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
+# include <limits.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <semaphore.h>
+# include <sys/wait.h>
+# include <limits.h>
 
-typedef struct s_philo t_philo;
+# define MSG_FORK "has taken a fork"
+# define MSG_EAT "is eating"
+# define MSG_SLEEP "is sleeping"
+# define MSG_THINK "is thinking"
+# define MSG_DIE "died"
+# define SEM_OPTION "/option"
+# define SEM_FORK "/fork"
+# define SEM_DEAD "/dead"
+# define SEM_OUTPUT "/output"
+# define SEM_CONSUL "/consul"
+# define ERROR_MESSAGE "An error has ocurred"
 
-typedef struct s_fork t_fork;
+typedef struct s_philo	t_philo;
 
-typedef struct timeval t_time;
+typedef struct s_fork	t_fork;
 
 typedef enum e_bool
 {
 	FALSE,
 	TRUE
-} t_bool;
+}						t_bool;
 
 typedef struct s_rule
 {
-	long num;
-	long time_to_die;
-	long time_to_eat;
-	long time_to_sleep;
-	t_bool option_exists;
-	long option;
-	t_bool  dead_exists;
-	t_bool odd_flag;
-	long full_philo_count;
-	sem_t *option_sem;
-	sem_t *fork_sem;
-	sem_t *dead_sem;
-	sem_t *output_sem;
-	sem_t *consul_sem;
-	pthread_t option_observer;
-} t_rule;
-
+	long		num;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	long		option;
+	long		full_philo_count;
+	t_bool		option_exists;
+	t_bool		dead_exists;
+	t_bool		odd_flag;
+	sem_t		*option_sem;
+	sem_t		*fork_sem;
+	sem_t		*dead_sem;
+	sem_t		*output_sem;
+	sem_t		*consul_sem;
+	pthread_t	option_observer;
+}						t_rule;
 
 struct s_philo
 {
-	pthread_t doctor;
-	pthread_t nurse;
-	long last_meal_time;
-	long num;
-	t_rule *rule;
-	long eat_count;
-	pid_t pid;
+	long		last_meal_time;
+	long		num;
+	long		eat_count;
+	pthread_t	doctor;
+	pthread_t	nurse;
+	t_rule		*rule;
+	pid_t		pid;
 };
 
-t_bool input_arg(t_rule *rule, int argc, char **argv);
+t_bool	input_arg(t_rule *rule, int argc, char **argv);
 
-t_bool ft_atol_limit(const char *str, long *return_value);
-t_bool is_num_str(char *str);
-void start_philos(t_rule *rule, t_philo *philo);
-long get_time_in_us();
-long get_time_in_ms();
-void philo_usleep(long time);
-long record_philo_action(t_philo *philo, const char *str);
-void philo_routine(t_philo *philo);
-void *nurse_routine(void *p);
-void *doctor_routine(void *p);
+t_bool	ft_atol_limit(const char *str, long *return_value);
+t_bool	is_num_str(char *str);
+void	start_philos(t_rule *rule, t_philo *philo);
+long	get_time_in_us(void);
+long	get_time_in_ms(void);
+void	philo_usleep(long time);
+long	record_philo_action(t_philo *philo, const char *str);
+void	philo_routine(t_philo *philo);
+void	*nurse_routine(void *p);
+void	*doctor_routine(void *p);
+
+#endif
