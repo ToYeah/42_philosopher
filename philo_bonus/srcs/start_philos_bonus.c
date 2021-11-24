@@ -67,6 +67,6 @@ void	start_philos(t_rule *rule, t_philo *philo)
 		}
 		i++;
 	}
-	start_option();
+	start_option(rule);
 	wait_philos(rule);
 }
