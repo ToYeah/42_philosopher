@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 19:06:26 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:07:19 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_bool	init_rule(t_rule *rule, int argc, char **argv)
 		|| rule->output_sem == SEM_FAILED || rule->consul_sem == SEM_FAILED)
 		return (FALSE);
 	rule->dead_exists = FALSE;
+	if (rule->option_exists && rule->option == 0)
+		rule->dead_exists = TRUE;
 	rule->full_philo_count = 0;
 	rule->odd_flag = TRUE;
 	if (rule->num % 2 == 0)
