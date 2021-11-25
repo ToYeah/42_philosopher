@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 13:07:19 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:15:52 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_bool	init_philosophers(t_rule *rule, t_philo **philo)
 		res[i].rule = rule;
 		res[i].num = i + 1;
 		res[i].eat_count = 0;
+		res[i].last_meal_time = get_time_in_ms();
 		i++;
 	}
 	*philo = res;
