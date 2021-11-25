@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 19:06:36 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:15:26 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	wait_philos(t_rule *rule)
 		if (WEXITSTATUS(status))
 		{
 			printf("Child process has error\n");
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 		i++;
 	}

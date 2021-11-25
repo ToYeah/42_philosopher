@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 10:55:51 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:15:20 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	philo_routine(t_philo *philo)
 	if (pthread_create(&(philo->nurse), NULL, nurse_routine, philo)
 		|| pthread_create(&(philo->doctor), NULL, doctor_routine, philo))
 	{
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	if (philo->num % 2 == 0)
 	{
