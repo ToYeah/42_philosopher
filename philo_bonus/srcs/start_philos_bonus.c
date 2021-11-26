@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 13:15:26 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:25:55 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	start_option(t_rule *rule)
 			printf("%s\n", ERROR_MESSAGE);
 			exit(EXIT_FAILURE);
 		}
+		pthread_detach(rule->option_observer);
 	}
 }
 
