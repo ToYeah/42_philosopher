@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 10:50:59 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/26 20:12:37 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define SEM_DEAD "/dead"
 # define SEM_OUTPUT "/output"
 # define SEM_CONSUL "/consul"
+# define SEM_TIME "/time"
 # define ERROR_MESSAGE "An error has ocurred"
 
 typedef struct s_philo	t_philo;
@@ -63,6 +64,7 @@ typedef struct s_rule
 	sem_t		*dead_sem;
 	sem_t		*output_sem;
 	sem_t		*consul_sem;
+	sem_t		*time_sem;
 	pthread_t	option_observer;
 }						t_rule;
 
@@ -95,5 +97,8 @@ void	put_fork(t_philo *philo);
 void	eat_meal(t_philo *philo);
 void	sleep_philo(t_philo *philo);
 void	think_philo(t_philo *philo);
+
+void	write_meal_time(t_philo *philo, long time);
+long	read_meal_time(t_philo *philo);
 
 #endif

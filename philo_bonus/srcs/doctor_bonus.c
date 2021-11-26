@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 13:15:13 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/26 20:13:43 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_bool	is_philo_arive(t_philo *philo)
 	long	now;
 
 	now = get_time_in_ms();
-	if (now - philo->last_meal_time >= philo->rule->time_to_die)
+	if (now - read_meal_time(philo) >= philo->rule->time_to_die)
 		return (FALSE);
 	return (TRUE);
 }

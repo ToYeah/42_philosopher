@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 10:52:04 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/26 20:14:02 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	put_fork(t_philo *philo)
 
 void	eat_meal(t_philo *philo)
 {
-	philo->last_meal_time = record_philo_action(philo, MSG_EAT);
+	write_meal_time(philo, record_philo_action(philo, MSG_EAT));
 	philo_usleep(philo->rule->time_to_eat, philo->rule);
 	philo->eat_count += 1;
 	if (philo->rule->option_exists && philo->eat_count == philo->rule->option)

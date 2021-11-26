@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 13:15:20 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/26 20:15:10 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	philo_routine(t_philo *philo)
 	{
 		philo_usleep(1, philo->rule);
 	}
-	philo->last_meal_time = get_time_in_ms();
+	write_meal_time(philo, get_time_in_ms());
 	while (philo->rule->dead_exists == FALSE
 		&& philo->rule->full_philo_count != philo->rule->num)
 	{

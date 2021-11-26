@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:06:03 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 16:15:52 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/26 20:10:09 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_bool	init_rule(t_rule *rule, int argc, char **argv)
 	rule->dead_sem = sem_open(SEM_DEAD, O_CREAT | O_EXCL, S_IRWXU, 0);
 	rule->output_sem = sem_open(SEM_OUTPUT, O_CREAT | O_EXCL, S_IRWXU, 1);
 	rule->consul_sem = sem_open(SEM_CONSUL, O_CREAT | O_EXCL, S_IRWXU, 1);
+	rule->time_sem = sem_open(SEM_TIME, O_CREAT | O_EXCL, S_IRWXU, 1);
 	if (rule->dead_sem == SEM_FAILED
 		|| rule->output_sem == SEM_FAILED || rule->consul_sem == SEM_FAILED)
 		return (FALSE);
@@ -78,6 +79,7 @@ void	delete_semaphores(void)
 	sem_unlink(SEM_DEAD);
 	sem_unlink(SEM_OUTPUT);
 	sem_unlink(SEM_CONSUL);
+	sem_unlink(SEM_TIME);
 }
 
 int	main(int argc, char **argv)
