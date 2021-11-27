@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 20:42:44 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:21:29 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_rule
 	long			option;
 	pthread_mutex_t	right_to_output;
 	pthread_mutex_t	right_to_consultation;
+	pthread_mutex_t	right_to_dead_exists;
 	t_bool			dead_exists;
 	t_bool			odd_flag;
 	long			full_philo_count;
@@ -97,5 +98,8 @@ void	init_philosophers_fork(t_philo *philo, t_fork *forks);
 t_philo	*init_philosophers(long count, t_fork *forks, t_rule *rule);
 t_bool	init_rule(t_rule *rule, int argc, char **argv);
 void	join_philosophers(t_philo *philos, long count);
+
+void	write_dead_exists(t_rule *rule);
+t_bool	read_dead_exists(t_rule *rule);
 
 #endif
