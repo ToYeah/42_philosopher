@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 21:21:23 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:21:04 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	philo_usleep(long time, t_rule *rule)
 	long	now;
 
 	start = get_time_in_us();
-	while (rule->dead_exists == FALSE
+	while (read_dead_exists(rule) == FALSE
 		&& rule->full_philo_count != rule->num)
 	{
 		now = get_time_in_us();
@@ -47,7 +47,7 @@ long	record_philo_action(t_philo *philo, const char *str)
 
 	pthread_mutex_lock(&(philo->rule->right_to_output));
 	time = get_time_in_ms();
-	if (philo->rule->dead_exists == FALSE
+	if (read_dead_exists(philo->rule) == FALSE
 		&& philo->rule->full_philo_count != philo->rule->num)
 		printf("%ld %ld %s\n", time, philo->num, str);
 	pthread_mutex_unlock(&(philo->rule->right_to_output));

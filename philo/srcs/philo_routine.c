@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/25 11:57:02 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:21:06 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*philo_routine(void *p)
 		record_philo_action(philo, MSG_FORK);
 		return (NULL);
 	}
-	while (philo->rule->dead_exists == FALSE
+	while (read_dead_exists(philo->rule) == FALSE
 		&& philo->rule->full_philo_count != philo->rule->num)
 	{
 		take_fork(philo);
