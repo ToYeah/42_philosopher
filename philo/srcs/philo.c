@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/27 18:21:57 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/28 09:36:43 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_bool	init_rule(t_rule *rule, int argc, char **argv)
 {
 	if (!input_arg(rule, argc, argv)
 		|| pthread_mutex_init(&(rule->right_to_output), NULL)
-		|| pthread_mutex_init(&(rule->right_to_consultation), NULL)
 		|| pthread_mutex_init(&(rule->right_to_dead_exists), NULL))
 	{
 		return (FALSE);
