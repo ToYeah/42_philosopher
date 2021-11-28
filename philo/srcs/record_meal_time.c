@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/27 18:21:07 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/28 11:28:17 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,5 @@ long	read_meal_time(t_philo *philo)
 	pthread_mutex_lock(&(philo->right_to_meal_time));
 	res = philo->last_meal_time;
 	pthread_mutex_unlock(&(philo->right_to_meal_time));
-	return (res);
-}
-
-void	write_dead_exists(t_rule *rule)
-{
-	pthread_mutex_lock(&(rule->right_to_dead_exists));
-	rule->dead_exists = TRUE;
-	pthread_mutex_unlock(&(rule->right_to_dead_exists));
-}
-
-t_bool	read_dead_exists(t_rule *rule)
-{
-	t_bool res;
-
-	pthread_mutex_lock(&(rule->right_to_dead_exists));
-	res = rule->dead_exists;
-	pthread_mutex_unlock(&(rule->right_to_dead_exists));
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/24 20:43:39 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/28 11:14:27 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ void	eat_meal(t_philo *philo)
 	philo_usleep(philo->rule->time_to_eat, philo->rule);
 	philo->eat_count += 1;
 	if (philo->rule->option_exists && philo->eat_count == philo->rule->option)
+	{
+		pthread_mutex_lock(&(philo->rule->right_to_output));
 		philo->rule->full_philo_count += 1;
+		pthread_mutex_unlock(&(philo->rule->right_to_output));
+	}
 }
 
 void	sleep_philo(t_philo *philo)
