@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/28 09:36:37 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/28 10:04:59 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_rule
 	t_bool			option_exists;
 	long			option;
 	pthread_mutex_t	right_to_output;
-	pthread_mutex_t	right_to_dead_exists;
 	t_bool			dead_exists;
 	t_bool			odd_flag;
 	long			full_philo_count;
@@ -98,7 +97,7 @@ t_philo	*init_philosophers(long count, t_fork *forks, t_rule *rule);
 t_bool	init_rule(t_rule *rule, int argc, char **argv);
 void	join_philosophers(t_philo *philos, long count);
 
-void	write_dead_exists(t_rule *rule);
-t_bool	read_dead_exists(t_rule *rule);
+
+t_bool	is_continue_simulation(t_rule *rule);
 
 #endif

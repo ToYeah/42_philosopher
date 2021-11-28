@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/28 09:36:40 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/11/28 10:49:02 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ void	*doctor_routine(void *p)
 	t_philo	*philo;
 
 	philo = (t_philo *)p;
-	while (read_dead_exists(philo->rule) == FALSE
-		&& philo->rule->full_philo_count != philo->rule->num)
+	while (is_continue_simulation(philo->rule))
 	{
 		usleep(1000);
 		pthread_mutex_lock(&(philo->rule->right_to_output));
-		if (is_philo_arive(philo) == FALSE && read_dead_exists(philo->rule) == FALSE)
+		if (is_philo_arive(philo) == FALSE && philo->rule->dead_exists == FALSE)
 		{
-			write_dead_exists(philo->rule);
+			philo->rule->dead_exists = TRUE;
 			printf("%ld %ld %s\n", get_time_in_ms(), philo->num, MSG_DIE);
 		}
 		pthread_mutex_unlock(&(philo->rule->right_to_output));
