@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:02:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/11/28 11:26:14 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/12/03 10:22:47 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	*doctor_routine(void *p)
 	{
 		usleep(1000);
 		pthread_mutex_lock(&(philo->rule->right_to_output));
-		if (is_philo_arive(philo) == FALSE && read_dead_exists(philo->rule) == FALSE)
+		if (is_philo_arive(philo) == FALSE
+			&& read_dead_exists(philo->rule) == FALSE)
 		{
 			write_dead_exists(philo->rule);
 			printf("%ld %ld %s\n", get_time_in_ms(), philo->num, MSG_DIE);
